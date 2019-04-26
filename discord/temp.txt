@@ -1,0 +1,30 @@
+f = open("users.txt", "a")
+
+TOKEN = 'NTU1MzrxD8nv2UaDNro'
+
+client = discord.Client()
+
+@client.event
+async def on_message(message):
+   # we do not want the bot to reply to itself
+  if message.author == client.user:
+    return
+
+    if message.content.startswith(';hello'):
+      msg = 'Hello {0.author.mention}'.format(message)
+      await (channel.send, msg)
+
+    if message.content.startswith(';join'):
+      msg = 'Hello {0.author.mention} and welcome to D.I.C.E.'.format(message)
+      await (channel.send, msg)
+      f.write(message.author.name + '\n')
+    f.close()
+
+@client.event
+async def on_ready():
+  print('Logged in as')
+  print(client.user.name)
+  print(client.user.id)
+  print('------')
+
+client.run(TOKEN)
